@@ -1,0 +1,53 @@
+import java.util.Stack;
+
+public class ReverseBinary {
+  
+  Stack<Integer> stack = new Stack<Integer>();
+  Stack<Integer> reverseStack = new Stack<Integer>();
+  int size;
+  
+  public static void main(String[] args) {
+    
+    BinaryConverter main = new BinaryConverter();
+    main.convertToBin(47);
+    main.reverse();
+    System.out.println(main.convertToNum());
+    
+  }
+  
+  public void convertToBin(int num) {
+    
+    int remainder;
+    
+    while (num > 0) {
+     
+      remainder = num % 2;
+      stack.push(remainder);
+      num = num / 2;
+      size++;
+      
+    } 
+  }
+  
+  public void reverse() {
+    for (int i = 0; i < size; i++)   
+      reverseStack.add(stack.pop());
+  }
+  
+  public int convertToNum() {
+    
+    int prev = 0;
+    int total = 0;
+    
+    for (int i = 0; i < size; i++) {
+      
+      int remainder = reverseStack.pop();
+      total = (prev * 2) + remainder;
+      prev = total;
+      
+    }
+    
+    return total;
+  }
+  
+}
